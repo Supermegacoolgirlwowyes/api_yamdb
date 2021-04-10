@@ -15,9 +15,11 @@ __pycache__/
 *.sublime-project
 *.sublime-workspace
 
-media/
-
 db.sqlite3
+
+docker-compose.yaml
+Dockerfile
+nginx/
 
 import.py
 run.py

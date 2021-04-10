@@ -13,7 +13,7 @@ services:
   web:
     build: .
     restart: always
-    # command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
     ports:
       - "8000:8000"
     depends_on:
@@ -27,9 +27,8 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     volumes:
-      - ./nginx.conf:/usr/local/etc/nginx.conf
+      - ./nginx/nginx.conf:/usr/local/etc/nginx.conf
       - ./static:/var/www/django/static:ro
-      - ./media:/var/www/django/media:ro
     depends_on:
       - web
     ports:
