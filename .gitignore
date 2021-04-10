@@ -17,9 +17,5 @@ __pycache__/
 
 db.sqlite3
 
-docker-compose.yaml
-Dockerfile
-nginx/
-
 import.py
 run.py
