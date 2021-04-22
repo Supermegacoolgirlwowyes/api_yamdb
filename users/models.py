@@ -12,7 +12,6 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
         )
-
         user.save(using=self._db)
         return user
 
@@ -22,23 +21,26 @@ class UserManager(BaseUserManager):
         if username is None:
             username = email.split('@')[0]
         user = self.create_user(
-            email,
             username=username,
+            email=email,
         )
+        user.is_staff = True
+        user.set_password(password)
         user.role = user.UserRoles.MOD
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username=None, password=None):
-        if not email:
+    def create_superuser(self, email, username, password):
+        if email is None:
             raise ValueError('Users must have an email address')
         if username is None:
             username = email.split('@')[0]
         user = self.create_user(
-            email,
+            email=email,
             username=username,
+            password=password,
         )
-        user.role = user.UserRoles.ADM
+        user.role = User.UserRoles.ADM
         user.save(using=self._db)
         return user
 
